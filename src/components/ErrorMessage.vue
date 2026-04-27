@@ -1,6 +1,6 @@
 <template>
   <div class="text-center">
-    <v-icon size="80" color="error" class="mb-4">
+    <v-icon size="80" style="color: #E24B4A" class="mb-4">
       mdi-alert-circle
     </v-icon>
 
@@ -12,6 +12,7 @@
       type="error"
       variant="tonal"
       class="mb-4 text-left"
+      style="background-color: #FEF2F2; border: 0.5px solid #E24B4A; border-radius: 8px;"
     >
       {{ message }}
     </v-alert>
@@ -20,7 +21,6 @@
       color="primary"
       size="large"
       block
-      min-height="52"
       @click="$emit('retry')"
     >
       Intentar de nuevo

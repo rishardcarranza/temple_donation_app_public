@@ -23,7 +23,6 @@ Formulario público PWA (Progressive Web App) para que los miembros de la iglesi
 ```
 templo-app-public/
 ├── public/
-│   ├── favicon.ico
 │   └── icons/                  # Íconos PWA (192x192, 512x512)
 ├── src/
 │   ├── main.js                 # Entrada, registra Vue + Vuetify
@@ -68,17 +67,19 @@ export default defineConfig({
     vue(),
     VitePWA({
       registerType: 'autoUpdate',
+      includeAssets: ['icons/icon-192.png', 'icons/icon-512.png'],
       manifest: {
         name: 'Aportaciones Templo',
         short_name: 'Aportaciones',
         description: 'Registra tu aportación mensual al fondo del templo',
-        theme_color: '#1565C0',
-        background_color: '#ffffff',
+        theme_color: '#0366F7',
+        background_color: '#FFFFFF',
         display: 'standalone',
         start_url: '/',
         icons: [
           { src: '/icons/icon-192.png', sizes: '192x192', type: 'image/png' },
-          { src: '/icons/icon-512.png', sizes: '512x512', type: 'image/png' }
+          { src: '/icons/icon-512.png', sizes: '512x512', type: 'image/png' },
+          { src: '/icons/icon-192.png', sizes: '192x192', type: 'image/png', purpose: 'any maskable' }
         ]
       }
     })
@@ -266,12 +267,29 @@ Mostrar errores de validación **inline** debajo de cada campo, no como alertas.
 
 ## Reglas de Diseño (Mobile First)
 
+### Paleta de Colores
+| Color | Hex |
+|-------|-----|
+| Primary | `#0366F7` |
+| Primary hover | `#0250C5` |
+| Surface suave | `#E6F1FB` |
+| Surface alternativo | `#F5F7FA` |
+| Éxito | `#1D9E75` |
+| Error / validación | `#E24B4A` |
+| Background | `#FFFFFF` |
+| Texto principal | `#1A1A2E` |
+| Texto secundario | `#6B7280` |
+
+### Directrices
 - Diseño centrado, máximo 480px de ancho en desktop
 - Fuente mínima 16px para evitar zoom automático en iOS
-- Botón de envío: ancho completo, altura mínima 52px, fácil de tocar
-- Colores: usar paleta de Vuetify con `primary` en azul o el color de la iglesia
+- Botón de envío: ancho completo, altura mínima 48px, fácil de tocar
+- Sin gradientes
+- Sin sombras decorativas
+- Bordes sutiles: 0.5px
+- border-radius: 8px (elementos), 12px (tarjetas)
 - Sin menú de navegación, sin header complejo, solo logo + formulario
-- El campo de periodo debe verse claramente como **no editable** (color gris, sin cursor)
+- El campo de periodo debe verse claramente como **no editable** (color gris suave)
 
 ---
 
@@ -288,9 +306,9 @@ Mostrar errores de validación **inline** debajo de cada campo, no como alertas.
 - [x] Crear `SuccessMessage.vue` mostrando datos del comprobante + botón WhatsApp
 - [x] Crear `ErrorMessage.vue` para errores de red
 - [x] Validaciones inline en el formulario
-- [ ] Probar en móvil real (no solo DevTools)
+- [x] Probar en móvil real (no solo DevTools)
 - [x] Generar íconos PWA y colocar en `/public/icons/`
-- [ ] Verificar que "Agregar a pantalla de inicio" funcione en Android y iOS
+- [x] Verificar que "Agregar a pantalla de inicio" funcione en Android y iOS
 - [x] Configurar `.env` con URL del backend real
 
 ---

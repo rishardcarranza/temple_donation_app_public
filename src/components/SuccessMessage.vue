@@ -1,6 +1,6 @@
 <template>
   <div class="text-center">
-    <v-icon size="80" color="success" class="mb-4">
+    <v-icon size="80" style="color: #1D9E75" class="mb-4">
       mdi-check-circle
     </v-icon>
 
@@ -13,50 +13,48 @@
       fue registrada.
     </p>
 
-    <v-card variant="tonal" class="mb-4 text-left pa-4">
+    <v-card variant="tonal" class="mb-4 text-left pa-4" style="border: 0.5px solid #E5E7EB; border-radius: 12px; background-color: #F5F7FA;">
       <div class="d-flex justify-space-between mb-2">
-        <span class="text-body-2 text-grey">Código:</span>
+        <span class="text-body-2" style="color: #6B7280">Código:</span>
         <span class="text-body-2 font-weight-medium">{{ donation.code }}</span>
       </div>
       <div class="d-flex justify-space-between mb-2">
-        <span class="text-body-2 text-grey">Periodo:</span>
+        <span class="text-body-2" style="color: #6B7280">Periodo:</span>
         <span class="text-body-2 font-weight-medium">{{ donation.month }}</span>
       </div>
       <div class="d-flex justify-space-between mb-2">
-        <span class="text-body-2 text-grey">Fecha:</span>
+        <span class="text-body-2" style="color: #6B7280">Fecha:</span>
         <span class="text-body-2 font-weight-medium">{{ donation.donationDate }}</span>
       </div>
       <div class="d-flex justify-space-between">
-        <span class="text-body-2 text-grey">Hora:</span>
+        <span class="text-body-2" style="color: #6B7280">Hora:</span>
         <span class="text-body-2 font-weight-medium">{{ donation.donationTime }}</span>
       </div>
     </v-card>
 
-    <p class="text-body-2 text-grey mb-4">
+    <p class="text-body-2 mb-4" style="color: #6B7280">
       Notifica tu donación por WhatsApp al líder.
     </p>
 
     <v-btn
       v-if="donation.whatsappPhone"
-      color="success"
+      style="background-color: #1D9E75; color: white"
       size="large"
       block
       :href="whatsappUrl"
       target="_blank"
       rel="noopener noreferrer"
-      min-height="52"
       class="mb-4"
     >
       <v-icon start>mdi-whatsapp</v-icon>
       Notificar por WhatsApp
     </v-btn>
 
-    <v-btn
+<v-btn
       variant="outlined"
       color="primary"
       size="large"
       block
-      min-height="52"
       @click="$emit('new-donation')"
     >
       Registrar otra aportación

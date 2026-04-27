@@ -15,13 +15,18 @@ const vuetify = createVuetify({
     themes: {
       light: {
         colors: {
-          primary: '#1565C0',
-          secondary: '#424242',
-          accent: '#82B1FF',
-          error: '#FF5252',
-          info: '#2196F3',
-          success: '#4CAF50',
-          warning: '#FFC107'
+          primary: '#0366F7',
+          secondary: '#6B7280',
+          accent: '#0366F7',
+          error: '#E24B4A',
+          info: '#0366F7',
+          success: '#1D9E75',
+          warning: '#F59E0B',
+          background: '#FFFFFF',
+          surface: '#F5F7FA',
+          'on-background': '#1A1A2E',
+          'on-surface': '#1A1A2E',
+          'surface-soft': '#E6F1FB'
         }
       }
     }

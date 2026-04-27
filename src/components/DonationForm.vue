@@ -29,7 +29,7 @@
       variant="outlined"
       readonly
       class="mb-4"
-      bg-color="grey-lighten-4"
+      bg-color="surface-soft"
     />
 
     <v-alert
@@ -48,7 +48,6 @@
       block
       :loading="loading"
       :disabled="loading"
-      min-height="52"
     >
       Registrar aportación
     </v-btn>
