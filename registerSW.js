@@ -1,0 +1,1 @@
+if('serviceWorker' in navigator) {window.addEventListener('load', () => {navigator.serviceWorker.register('/temple_donation_app_public/sw.js', { scope: '/temple_donation_app_public/' })})}
