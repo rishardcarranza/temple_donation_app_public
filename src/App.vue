@@ -6,7 +6,7 @@
           <v-col cols="12" sm="10" md="8" lg="6" xl="4">
             <v-card class="pa-6" rounded="lg">
               <v-img
-                src="/icons/icon-192.png"
+                :src="`${base}icons/icon-192.png`"
                 height="60"
                 width="60"
                 class="mx-auto mb-4"
@@ -43,6 +43,7 @@
 </template>
 
 <script setup>
+const base = import.meta.env.BASE_URL
 import { ref } from 'vue'
 import DonationForm from './components/DonationForm.vue'
 import SuccessMessage from './components/SuccessMessage.vue'
