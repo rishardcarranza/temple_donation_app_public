@@ -6,21 +6,29 @@
           <v-col cols="12" sm="10" md="8" lg="6" xl="4">
             <v-card class="pa-6" rounded="lg">
               <v-img
-                :src="`${base}icons/icon-192.png`"
+                src="./icons/icon-192.png"
                 height="60"
                 width="60"
                 class="mx-auto mb-4"
                 contain
               />
 
-              <h1 class="text-h5 text-center mb-6 text-primary">
+              <h1 class="text-h5 text-center mb-1 text-primary">
                 Aportaciones Templo
               </h1>
+
+              <p
+                v-if="wardName"
+                class="text-body-2 text-center text-medium-emphasis mb-6"
+              >
+                {{ wardName }}
+              </p>
 
               <DonationForm
                 v-if="view === 'form'"
                 @success="handleSuccess"
                 @error="handleError"
+                @info-loaded="handleInfoLoaded"
               />
 
               <SuccessMessage
@@ -43,7 +51,6 @@
 </template>
 
 <script setup>
-const base = import.meta.env.BASE_URL
 import { ref } from 'vue'
 import DonationForm from './components/DonationForm.vue'
 import SuccessMessage from './components/SuccessMessage.vue'
@@ -52,6 +59,7 @@ import ErrorMessage from './components/ErrorMessage.vue'
 const view = ref('form')
 const donationData = ref(null)
 const errorMessage = ref('')
+const wardName = ref('')
 
 const handleSuccess = (data) => {
   donationData.value = data
@@ -61,6 +69,10 @@ const handleSuccess = (data) => {
 const handleError = (message) => {
   errorMessage.value = message
   view.value = 'error'
+}
+
+const handleInfoLoaded = (data) => {
+  wardName.value = data.wardName
 }
 
 const resetForm = () => {

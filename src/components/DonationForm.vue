@@ -23,6 +23,28 @@
       class="mb-2"
     />
 
+    <div class="leader-selection mb-4">
+      <div class="text-body-2 text-medium-emphasis mb-2">Notificar a:</div>
+      <v-btn-toggle
+        v-model="selectedLeader"
+        mandatory
+        divided
+        variant="outlined"
+        color="primary"
+        class="w-100"
+      >
+        <v-btn
+          v-for="option in leaderOptions"
+          :key="option.value"
+          :value="option.value"
+          size="small"
+          class="flex-grow-1"
+        >
+          {{ option.label }}
+        </v-btn>
+      </v-btn-toggle>
+    </div>
+
     <v-text-field
       :model-value="publicInfo.month_display"
       label="Periodo"
@@ -58,7 +80,7 @@
 import { ref, reactive, onMounted, computed } from 'vue'
 import { getPublicInfo, submitDonation, getDonationReceipt } from '../api/donations'
 
-const emit = defineEmits(['success', 'error'])
+const emit = defineEmits(['success', 'error', 'info-loaded'])
 
 const form = ref(null)
 const loading = ref(false)
@@ -67,7 +89,20 @@ const publicInfo = ref({
   month_display: '',
   donation_goal: 0,
   default_amount: 2,
-  whatsapp_phone: ''
+  whatsapp_phone: '',
+  leader_options: [],
+  default_leader: 'socsoc'
+})
+
+const selectedLeader = ref('socsoc')
+
+const leaderOptions = computed(() => {
+  return publicInfo.value.leader_options || []
+})
+
+const selectedLeaderPhone = computed(() => {
+  const leader = leaderOptions.value.find(l => l.value === selectedLeader.value)
+  return leader?.whatsapp_phone || publicInfo.value.whatsapp_phone
 })
 
 const formData = reactive({
@@ -98,10 +133,16 @@ onMounted(async () => {
   try {
     const { data } = await getPublicInfo()
     publicInfo.value = data
-    
+
     if (data.default_amount) {
       formData.amount = data.default_amount
     }
+
+    selectedLeader.value = data.default_leader || 'socsoc'
+
+    emit('info-loaded', {
+      wardName: data.ward_name || ''
+    })
   } catch (error) {
     console.error('Error fetching public info:', error)
   }
@@ -121,7 +162,8 @@ const submit = async () => {
 
     const { data } = await submitDonation({
       name: formData.name,
-      amount: amountToSend
+      amount: amountToSend,
+      leader_source: selectedLeader.value
     })
 
     if (data.alert) {
@@ -138,7 +180,7 @@ const submit = async () => {
       donationDate: receiptData.donation_date,
       donationTime: receiptData.donation_time,
       code: receiptData.member_code,
-      whatsappPhone: publicInfo.value.whatsapp_phone
+      whatsappPhone: selectedLeaderPhone.value
     })
   } catch (error) {
     const message = error.response?.data?.detail || 'Error al registrar la donación. Intenta de nuevo.'
