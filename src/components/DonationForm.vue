@@ -3,6 +3,7 @@
     <v-text-field
       v-model="formData.name"
       label="Tu nombre completo"
+      persistent-placeholder=""
       variant="outlined"
       :rules="[rules.required, rules.minLength]"
       :error-messages="errors.name"
@@ -23,7 +24,7 @@
       class="mb-2"
     />
 
-    <div class="leader-selection mb-4">
+    <div class="leader-selection mb-8">
       <div class="text-body-2 text-medium-emphasis mb-2">Notificar a:</div>
       <v-btn-toggle
         v-model="selectedLeader"
@@ -47,7 +48,7 @@
 
     <v-text-field
       :model-value="publicInfo.month_display"
-      label="Periodo"
+      label="Para el viaje al Templo de:"
       variant="outlined"
       readonly
       class="mb-4"
